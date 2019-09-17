@@ -87,7 +87,7 @@ namespace GameConsole
 
             WriteLine("Available commands:");
             WriteLine("<playername> create");
-            WriteLine("<playername> hit");
+            WriteLine("<playername> hit <value>");
             WriteLine("<playername> display");
             WriteLine("<playername> error");
         }
