@@ -25,7 +25,7 @@ namespace GameConsole.ActorModel.Actors
 
             Recover<HitMessage>(message =>
             {
-                DisplayHelper.WriteLine($"{_playerName} replaying HitMessage {message}, from journal");
+                DisplayHelper.WriteLine($"{_playerName} replaying HitMessage {message} from journal");
                 _health -= message.Damage;
             });
         }
@@ -36,11 +36,11 @@ namespace GameConsole.ActorModel.Actors
 
             DisplayHelper.WriteLine($"{_playerName} persisting HitMessage");
 
-            Persist(message, HitMessage =>
+            Persist(message, hitMessage =>
             {
-                DisplayHelper.WriteLine($"{_playerName} persisting HitMessage ok, updating actor state");
+                DisplayHelper.WriteLine($"{_playerName} persisted HitMessage ok, updating actor state");
                 _health -= message.Damage;
-            });
+            });            
         }
 
         private void DisplayPlayerStatus()
