@@ -1,4 +1,5 @@
-﻿using OdeToFood.Data.Services;
+﻿using OdeToFood.Data.Models;
+using OdeToFood.Data.Services;
 using System.Web.Mvc;
 
 namespace OdeToFood.Web.Controllers
@@ -12,12 +13,14 @@ namespace OdeToFood.Web.Controllers
             _db = db;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             var model = _db.GetAll();
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult Details(int id)
         {
             var model = _db.GetOne(id);
@@ -26,6 +29,30 @@ namespace OdeToFood.Web.Controllers
                 return View("NotFound");
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Restaurant restaurant)
+        {
+            if (string.IsNullOrWhiteSpace(restaurant.Name))
+            {
+                ModelState.AddModelError(nameof(restaurant.Name), "The name is required");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Add(restaurant);
+                return View();
+            }
+
+            return View();
         }
     }
 }
