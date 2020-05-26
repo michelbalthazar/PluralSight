@@ -17,6 +17,13 @@ namespace OdeToFood.Data.Services
                 new Restaurant { Id = 3, Name ="Mango Grove", Cuisine= CuisineType.Indian }
             };
         }
+
+        public void Add(Restaurant restaurant)
+        {
+            restaurant.Id = restaurants.Max(e => e.Id) + 1;
+            restaurants.Add(restaurant);
+        }
+
         public IEnumerable<Restaurant> GetAll()
         {
             return restaurants.OrderBy(e => e.Name);
