@@ -24,6 +24,11 @@ namespace OdeToFood.Data.Services
             restaurants.Add(restaurant);
         }
 
+        public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Restaurant> GetAll()
         {
             return restaurants.OrderBy(e => e.Name);
@@ -43,8 +48,6 @@ namespace OdeToFood.Data.Services
                 existing.Name = restaurant.Name;
                 existing.Cuisine = restaurant.Cuisine;
             }
-            //restaurants.RemoveAll(e => e.Id == restaurant.Id);
-            //restaurants.Add(restaurant);
         }
     }
 }
