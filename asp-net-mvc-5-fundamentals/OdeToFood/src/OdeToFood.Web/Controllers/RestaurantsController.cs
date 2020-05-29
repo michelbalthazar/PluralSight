@@ -1,5 +1,6 @@
 ﻿using OdeToFood.Data.Models;
 using OdeToFood.Data.Services;
+using OdeToFood.Web.Extensions;
 using System.Web.Mvc;
 
 namespace OdeToFood.Web.Controllers
@@ -14,6 +15,7 @@ namespace OdeToFood.Web.Controllers
         }
 
         [HttpGet]
+        //[IsMobile] // Extension  Action Method Selector
         public ActionResult Index()
         {
             var model = _db.GetAll();
