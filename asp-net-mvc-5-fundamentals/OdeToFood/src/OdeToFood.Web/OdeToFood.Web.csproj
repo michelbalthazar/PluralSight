@@ -162,6 +162,7 @@
     <Compile Include="Configuration\RedirectColletion.cs" />
     <Compile Include="Configuration\RedirectModule.cs" />
     <Compile Include="Configuration\RedirectSection.cs" />
+    <Compile Include="Extensions\IsMobile.cs" />
     <Compile Include="Handlers\SampleHandler.cs" />
     <Compile Include="LogModule.cs" />
     <Compile Include="Controllers\GreetingController.cs" />
