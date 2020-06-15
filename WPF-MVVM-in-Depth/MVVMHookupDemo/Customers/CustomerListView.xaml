@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cust="clr-namespace:MVVMHookupDemo.Customers"
+             xmlns:root="clr-namespace:MVVMHookupDemo"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             root:ViewModelLocator.AutoWriteViewModel="True">
     <!--<UserControl.DataContext>
         <cust:CustomerListViewModel />
     </UserControl.DataContext>-->

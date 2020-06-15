@@ -7,7 +7,7 @@ namespace MVVMHookupDemo.Customers
         public CustomerListView()
         {
             InitializeComponent();
-            this.DataContext = new CustomerListViewModel();
+            //this.DataContext = new CustomerListViewModel();
         }
     }
 }
