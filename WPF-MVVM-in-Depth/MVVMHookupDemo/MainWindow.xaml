@@ -3,12 +3,19 @@
         xmlns:Customers="clr-namespace:MVVMHookupDemo.Customers"
         x:Class="MVVMHookupDemo.MainWindow"
         Title="MainWindow"
-        Height="350"
-        Width="525">
-    <Grid>
-
-
-        <Customers:CustomerListView />
+        Height="360.621"
+        Width="613.827">
+    <Grid Margin="0,-56,0,-0.333" Height="380" VerticalAlignment="Bottom">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="256*"/>
+            <ColumnDefinition Width="265*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="231*"/>
+            <RowDefinition Height="149*"/>
+        </Grid.RowDefinitions>
+        <Customers:CustomerListView Margin="10,0,10,10" Height="159" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
+        <Customers:CustomerDetailView Height="130" Margin="10,4,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1"/>
 
 
     </Grid>
