@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MVVMHookupDemo.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MVVMHookupDemo.Services;
 using Zza.Data;
 
 namespace MVVMHookupDemo.Customers

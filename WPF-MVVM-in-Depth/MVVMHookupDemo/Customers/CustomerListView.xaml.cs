@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace MVVMHookupDemo.Customers
 {
@@ -9,8 +6,8 @@ namespace MVVMHookupDemo.Customers
     {
         public CustomerListView()
         {
-            this.DataContext = new CustomerListViewModel();
             InitializeComponent();
+            this.DataContext = new CustomerListViewModel();
         }
     }
 }
