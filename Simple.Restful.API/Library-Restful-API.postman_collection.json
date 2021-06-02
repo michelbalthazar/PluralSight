@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "970ee90e-3a4c-4822-bbe7-123cd26f5645",
+		"name": "Library-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get-AuthorCollection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6058/api/authorsCollections/(authorId, authorId, authorId, authorId...)",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6058",
+					"path": [
+						"api",
+						"authorsCollections",
+						"(authorId, authorId, authorId, authorId...)"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post-AuthorCollection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"FirstName\": \"Michel\",\r\n        \"LastName\": \"Balthazar\",\r\n        \"DateOfBirth\": \"1994-02-11\",\r\n        \"genre\": \"Science fiction\",\r\n        \"books\": [\r\n            {\r\n                \"title\": \"teste123\",\r\n                \"description\": \"teste teste\"\r\n            },\r\n            {\r\n                \"title\": \"13123123\",\r\n                \"description\": \"teste teste21341235r1erqwedawsc\"\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"FirstName\": \"Michel123\",\r\n        \"LastName\": \"Balthazar\",\r\n        \"DateOfBirth\": \"1994-02-11\",\r\n        \"genre\": \"123\",\r\n        \"books\": [\r\n            {\r\n                \"title\": \"teste123\",\r\n                \"description\": \"teste teste\"\r\n            },\r\n            {\r\n                \"title\": \"13123123\",\r\n                \"description\": \"teste teste21341235r1erqwedawsc\"\r\n            }\r\n        ]\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6058/api/authorsCollections/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6058",
+					"path": [
+						"api",
+						"authorsCollections",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post-Author",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"FirstName\": \"Michel\",\r\n    \"LastName\": \"Balthazar\",\r\n    \"DateOfBirth\": \"1994-02-11\",\r\n    \"genre\": \"Science fiction\",\r\n    \"books\": [\r\n        {\r\n            \"title\": \"teste123\",\r\n            \"description\": \"teste teste\"\r\n        },\r\n        {\r\n            \"title\": \"13123123\",\r\n            \"description\": \"teste teste21341235r1erqwedawsc\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6058/api/authors/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6058",
+					"path": [
+						"api",
+						"authors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6058/api/authors/{authorId}/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6058",
+					"path": [
+						"api",
+						"authors",
+						"{authorId}",
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6058/api/authors/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6058",
+					"path": [
+						"api",
+						"authors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-Author",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6058/api/authors/{authorId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6058",
+					"path": [
+						"api",
+						"authors",
+						"{authorId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-Books",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6058/api/authors/authorId/books/{bookId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6058",
+					"path": [
+						"api",
+						"authors",
+						"authorId",
+						"books",
+						"{bookId}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
