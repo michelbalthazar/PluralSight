@@ -4,6 +4,7 @@ using AutoMapper;
 using Library.API.Entities;
 using Library.API.Models;
 using Library.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.API.Controllers
@@ -103,9 +104,9 @@ namespace Library.API.Controllers
             if (bookFromRepo == null)
                 return NotFound();
 
-            var bookEntity = _mapper.Map<Book>(bookResourceDTO);
+            _mapper.Map<BookUpdateResourceDTO, Book>(bookResourceDTO, bookFromRepo);
 
-            _libraryRepository.UpdateBookForAuthor(bookEntity);
+            _libraryRepository.UpdateBookForAuthor(bookFromRepo);
 
             if (!_libraryRepository.Save())
             {
@@ -113,9 +114,57 @@ namespace Library.API.Controllers
                 //return StatusCode(500, "A problem happened with handling your request.")
             }
 
-            var book = _mapper.Map<BookDTO>(bookEntity);
+            var book = _mapper.Map<BookDTO>(bookFromRepo);
 
-            return CreatedAtRoute("GetBookForAuthor", new { authorId = authorId, bookId = book.Id }, book);
+            return Ok(book);
+        }
+
+        [HttpPatch("{bookId}")]
+        public IActionResult PathBookForAuthor(Guid authorId, Guid bookId, [FromBody] JsonPatchDocument<BookUpdateResourceDTO> bookResourceDTO)
+        {
+            if (bookResourceDTO == null)
+            {
+                return BadRequest();
+            }
+
+            if (!_libraryRepository.AuthorExists(authorId))
+            {
+                return NotFound();
+            }
+
+            var bookFromRepo = _libraryRepository.GetBookForAuthor(authorId, bookId);
+            if (bookFromRepo == null)
+                return NotFound();
+
+            var bookToPatch = _mapper.Map<BookUpdateResourceDTO>(bookFromRepo);
+
+            bookResourceDTO.ApplyTo(bookToPatch, ModelState);
+
+            if (bookToPatch.Description == bookToPatch.Title)
+            {
+                ModelState.AddModelError(nameof(BookUpdateResourceDTO),
+                    "The provided description should be different from the title.");
+            }
+
+            TryValidateModel(bookToPatch);
+
+            if (!ModelState.IsValid)
+            {
+                return new Library.API.Helpers.UnprocessableEntityObjectResult(ModelState);
+            }
+
+            _mapper.Map<BookUpdateResourceDTO, Book>(bookToPatch, bookFromRepo);
+
+            _libraryRepository.UpdateBookForAuthor(bookFromRepo);
+
+            if (!_libraryRepository.Save())
+            {
+                throw new Exception($"Patching book {bookId} for author {authorId} failed on save.");
+            }
+
+            var book = _mapper.Map<BookDTO>(bookFromRepo);
+
+            return Ok(book);
         }
     }
 }

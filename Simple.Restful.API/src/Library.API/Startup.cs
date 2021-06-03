@@ -54,10 +54,11 @@ namespace Library.API
                 cfg.CreateMap<Book, BookDTO>();
 
                 cfg.CreateMap<AuthorCreateResourceDTO, Author>();
-                cfg.CreateMap<BookCreateResourceDTO, Book>();
-
                 cfg.CreateMap<AuthorUpdateResourceDTO, Author>();
+
+                cfg.CreateMap<BookCreateResourceDTO, Book>();
                 cfg.CreateMap<BookUpdateResourceDTO, Book>();
+                cfg.CreateMap<Book, BookUpdateResourceDTO>();
             });
 
             services.AddSingleton(config.CreateMapper());
