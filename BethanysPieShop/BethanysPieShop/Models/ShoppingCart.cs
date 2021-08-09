@@ -46,7 +46,7 @@ namespace BethanysPieShop.Models
                 {
                     ShoppingCartId = ShoppingCartId,
                     Pie = pie,
-                    Amount = 1
+                    Amount = amount
                 };
 
                 _appDbContext.ShoppingCartItem.Add(shoppingCartItem);
