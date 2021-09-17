@@ -1,4 +1,5 @@
 ﻿using Library.API.Entities;
+using Library.API.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,17 +65,36 @@ namespace Library.API.Services
             return _context.Authors.FirstOrDefault(a => a.Id == authorId);
         }
 
-        public IEnumerable<Author> GetAuthors()
+        public PagedList<Author> GetAuthors(AuthorsResourceParameters authorsResourceParameters)
         {
-            return _context.Authors.OrderBy(a => a.FirstName).ThenBy(a => a.LastName);
+            var collectionBeforePaging = _context.Authors
+                .OrderBy(a => a.FirstName)
+                .ThenBy(a => a.LastName).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(authorsResourceParameters.Genre))
+                collectionBeforePaging = collectionBeforePaging.Where(e => e.Genre.ToLowerInvariant() == authorsResourceParameters.Genre.Trim().ToLowerInvariant());
+
+            if (!string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
+            {
+                var whereClause = authorsResourceParameters.SearchQuery.Trim().ToLowerInvariant();
+
+                collectionBeforePaging = collectionBeforePaging
+                    .Where(e => e.Genre.ToLowerInvariant().Contains(whereClause) || e.FirstName.ToLowerInvariant().Contains(whereClause) || e.LastName.ToLowerInvariant().Contains(whereClause));
+            }
+
+            if(authorsResourceParameters.AuthorIds.Any() )
+                collectionBeforePaging = collectionBeforePaging.Where(e => authorsResourceParameters.AuthorIds.Contains(e.Id));
+
+            return PagedList<Author>.Factory(collectionBeforePaging, authorsResourceParameters.PageNumber, authorsResourceParameters.PageSize);
         }
 
-        public IEnumerable<Author> GetAuthors(IEnumerable<Guid> authorIds)
+        public PagedList<Author> GetAuthors(AuthorsResourceParameters authorsResourceParameters)
         {
-            return _context.Authors.Where(a => authorIds.Contains(a.Id))
+            var collectionBeforePaging = _context.Authors.Where(a => authorsResourceParameters.AuthorIds.Contains(a.Id))
                 .OrderBy(a => a.FirstName)
-                .OrderBy(a => a.LastName)
-                .ToList();
+                .OrderBy(a => a.LastName);
+
+            return PagedList<Author>.Factory(collectionBeforePaging, authorsResourceParameters.PageNumber, authorsResourceParameters.PageSize);
         }
 
         public void UpdateAuthor(Author author)
